@@ -11,10 +11,12 @@
 
   vd.createElement = function (node) {
     if (typeof node === 'string') {
-      return document.createTextNode(node);
+      return d.createTextNode(node);
     }
 
-    const el = document.createElement(node.type);
+    const el = d.createElement(node.type);
+
+    // creating children
     if (node.children !== undefined){
       node.children
         .map(vd.createElement)
