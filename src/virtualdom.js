@@ -1,7 +1,9 @@
+// TODO: Buat anunya props
+
 (function(w, d){
   const vd = {};
 
-  vd.h = function(type, props, ...children){
+  vd.createElement = function(type, props, ...children){
     return {
       type,
       props,
@@ -9,7 +11,7 @@
     }
   };
 
-  vd.createElement = function (node) {
+  vd.node = function (node) {
     if (typeof node === 'string') {
       return d.createTextNode(node);
     }
@@ -19,7 +21,7 @@
     // creating children
     if (node.children !== undefined){
       node.children
-        .map(vd.createElement)
+        .map(vd.node)
         .forEach(el.appendChild.bind(el));
     }
     return el;
@@ -28,7 +30,7 @@
   vd.render = function(vdom, el){
     if (el === null) throw Error('Element root tidak dapat digunakan.');
 
-    const dom = el.appendChild(vdom);
+    const dom = el.appendChild(vd.node(vdom));
     return dom;
   }
 
